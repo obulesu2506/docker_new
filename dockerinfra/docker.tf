@@ -9,7 +9,7 @@ resource "aws_instance" "docker" {
     volume_type = "gp3" #use gp3 for better performance (OPTIONAL)
   }
 
-  #user_data = file("docker.sh") # this is not working so commented
+  user_data = file("docker.sh") # this is not working so commented
 
   tags = {
     Name = "Docker"
