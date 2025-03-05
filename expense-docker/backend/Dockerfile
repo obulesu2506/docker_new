@@ -1,4 +1,10 @@
-FROM node:20
+#Used in normal scenario
+#FROM node:20
+#As part of Best practices i.e., Run as non-root user & minimal size images
+FROM node:20.18.3-alpine3.21
+RUN addgroup -S expense && adduser -S expense -G expense
+RUN mkdir /opt/backend
+RUN chown -R expense:expense /opt/backend
 #folder created for configuration setup
 WORKDIR /opt/backend 
 #copied dependencies
@@ -11,5 +17,6 @@ RUN npm install
 #configuring backend to connect from backend to DB via localhost network
 ENV DB_HOST="localhost"
 #executing the index JS file via node
+USER expense
 CMD [ "node", "index.js" ]
 
